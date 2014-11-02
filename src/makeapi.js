@@ -1,13 +1,16 @@
 var xport = require('./xport')
+  , dtype = require('./lib/dtype')
   ;
 
 var makeAPI = (function() {
     function MakeAPI() {}
 
-    MakeAPI.route = function(express, url, func, version, post, put, del) {
-        if (isNaN(version) || version < 1) {
+    MakeAPI.route = function(express, url, func, version, post, put, del, nowildcard) {
+        if (!dtype.isNumerical(version)) {
             version = 1;
         }
+
+        version = new Number(version);
 
         if (post === undefined || post == null || post !== true) {
             post = false;
@@ -21,25 +24,57 @@ var makeAPI = (function() {
             del = false;
         }
 
+        if (nowildcard === undefined || nowildcard == null || nowildcard !== true) {
+            nowildcard = false;
+        }
+
+        var fullUrl = url + (nowildcard ? '' : '/*');
+        var versionPath = '/v' + version
+        
         var routeLive = express.route(url);
-        var routeVersion = express.route('/v' + version + url);
+        var routeVersion = express.route(versionPath + url);
+
+        if (!nowildcard) {
+            var routeLiveWildcard = express.route(fullUrl);
+            var routeVersionWildcard = express.route(versionPath + fullUrl);
+        }
 
         routeLive.get(func);
         routeVersion.get(func);
 
+        if (!nowildcard) {
+            routeLiveWildcard.get(func);
+            routeVersionWildcard.get(func);
+        }
+
         if (post) {
             routeLive.post(func);
             routeVersion.post(func);
+
+            if (!nowildcard) {
+                routeLiveWildcard.post(func);
+                routeVersionWildcard.post(func);
+            }
         }
 
         if (put) {
             routeLive.put(func);
             routeVersion.put(func);
+
+            if (!nowildcard) {
+                routeLiveWildcard.put(func);
+                routeVersionWildcard.put(func);
+            }
         }
 
         if (del) {
             routeLive.delete(func);
             routeVersion.delete(func);
+
+            if (!nowildcard) {
+                routeLiveWildcard.delete(func);
+                routeVersionWildcard.delete(func);
+            }
         }
     };
 
