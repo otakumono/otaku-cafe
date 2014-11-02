@@ -1,0 +1,8 @@
+{
+  "port": 99,
+  "database": {
+    "host": "localhost",
+    "port": 27017,
+    "name": "otaku"
+  }
+}

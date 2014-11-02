@@ -1,0 +1,11 @@
+{
+  "port": 3309,
+  "database": {
+    "host": "localhost",
+    "port": 27017,
+    "name": "otaku"
+  },
+  "logger": {
+    "format": "dev"
+  }
+}
