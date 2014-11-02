@@ -30,3 +30,6 @@ node_modules
 # Sublime
 *.sublime-project
 *.sublime-workspace
+
+# Posters
+public/posters/

@@ -15,6 +15,15 @@ var SchemaAnime = mongoose.Schema({
     episodesReleased: Number,
     episodesTotal: Number,
     episodeDuration: Number,
+    contentRating: Number,
+    synopsis: [SchemaTranslationLanguage],
+    adaptedType: Number,
+    adaptedFrom: Number,
+    related: [Number],
+    sidestory: [Number],
+    spinoff: [Number],
+    parentType: Number,
+    parentId: Number
 });
 
 /* Module Export */
