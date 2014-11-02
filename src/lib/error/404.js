@@ -8,12 +8,13 @@ var error404 = function(options) {
         'error': 'Script not found'
     };
 
-    return function(request, result, next) {
-        if (result.body) {
+    return function(request, response, next) {
+        if (response.body) {
             return next();
         }
 
-        result.status(404).send(body);
+        response.type('application/json');
+        response.status(404).send(body);
     };
 };
 

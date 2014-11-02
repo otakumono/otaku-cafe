@@ -23,6 +23,7 @@ if ('test' !== cafe.get('env')) {
 cafe.use(responseTime());
 cafe.use(favicon('./public/favicon.ico'));
 cafe.use(bodyParser.json());
+cafe.set('json spaces', 2);
 cafe.use(bodyParser.urlencoded({ extended: false }));
 cafe.use(cors());
 
