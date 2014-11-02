@@ -1,6 +1,8 @@
 var xport = require('../../../xport')
   , makeAPI = require('../../../makeapi')
   , AnimeType = require('../../../lib/database/animeType')
+  , DBManager = require('../../../lib/database/dbmanager')
+  , ModelAnime = require('../../../lib/database/modelAnime')
   ;
 
 var anime = (function() {
@@ -15,26 +17,51 @@ var anime = (function() {
     };
 
     Anime.lookupID = function(request, response, next) {
-        response.type('application/json');
-
         var id = request.params.id;
         Anime.internalLookup(id, function(error, result) {
             if (error) {
                 return next(error);
             }
 
+            response.type('application/json');
             response.send(result);
         });
     };
 
     Anime.lookupName = function(request, response, next) {
+        var name = request.params.name;
+        if (!name) {
+            response.type('application/json');
+            response.send({ id: 0 });
+            return;
+        }
 
+        name = name.replace(/\+/g, ' ');
+
+        DBManager.findRecordByName(ModelAnime, name, function(error, result) {
+            if (error) {
+                return next(error);
+            }
+
+            var queryResult = { id: 0 };
+
+            if (result) {
+                queryResult = result;
+            }
+            
+            response.type('application/json');
+            response.send(queryResult);
+        });
     };
 
     Anime.searchName = function(request, response, next) {
-        response.type('application/json');
-
         var name = request.params.name;
+        if (!name) {
+            response.type('application/json');
+            response.send({ id: 0 });
+            return;
+        }
+
         Anime.internalSearch(name, function(error, result) {
             if (error) {
                 return next(error);
@@ -47,16 +74,28 @@ var anime = (function() {
                 "result": result
             };
 
+            response.type('application/json');
             response.send(queryResult);
         }, { type: AnimeType.TV });
     };
 
     Anime.internalLookup = function(id, callback) {
-
+        DBManager.getRecord(ModelAnime, id, callback);
     };
 
     Anime.internalSearch = function(name, callback, params) {
-        
+        DBManager.findRecordByName(ModelAnime, name, function(error, result) {
+            if (error) {
+                return callback(error, result);
+            }
+
+            var queryResult = { id: 0 };
+            if (result) {
+                queryResult.id = result.id;
+            }
+
+            callback(error, queryResult);
+        });
     };
 
     return Anime;

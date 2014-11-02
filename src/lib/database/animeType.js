@@ -3,6 +3,7 @@ var xport = require('../../xport')
   ;
 
 var types = [
+    "Unknown",
     "TV",
     "OVA",
     "Movie",
@@ -21,13 +22,13 @@ var animeType = (function() {
 
     AnimeType.findType = function(name) {
         if (name === undefined || name == null) {
-            return AnimeType.TV;
+            return AnimeType.Unknown;
         }
 
         var num = new Number(name);
         if (dtype.isNumber(num)) {
             if (AnimeType[num] === undefined) {
-                return AnimeType.TV;
+                return AnimeType.Unknown;
             }
             
             return num;
@@ -35,7 +36,7 @@ var animeType = (function() {
 
         var type = AnimeType[new String(name).toLowerCase()];
         if (type === undefined) {
-            return AnimeType.TV;
+            return AnimeType.Unknown;
         }
 
         return type;
