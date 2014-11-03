@@ -33,7 +33,8 @@
     "node": ">= 0.10.x"
   },
   "scripts": {
-    "start": "nodemon --exec node src/cafe.js --ext js,json"
+    "start": "nodemon --exec node src/cafe.js --ext js,json",
+    "test-travis": ""
   },
   "dependencies": {
     "express": "~4.10.1",
@@ -44,7 +45,9 @@
     "morgan": "~1.4.0",
     "response-time": "~2.2.0",
     "body-parser": "^1.9.2",
-    "serve-favicon": "~2.1.6"
+    "serve-favicon": "~2.1.6",
+    "node-oauth2-server": "~2.2.2",
+    "passport": "~0.2.1"
   },
   "devDependencies": {
     "debug": "~0.7.2"
