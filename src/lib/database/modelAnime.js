@@ -1,5 +1,5 @@
-var mongoose = require('mongoose')
-  , xport = require('../../xport')
+var xport = require('../../xport')
+  , mongoose = require('../../connections').otaku
   , SchemaAnime = require('./schemaAnime')
   ;
 

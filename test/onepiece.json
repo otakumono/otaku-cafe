@@ -1,0 +1,107 @@
+{
+    "_id" : ObjectId("5456adc9ea16efc1a812dd9f"),
+    "id" : 1,
+    "type" : 1,
+    "status" : 2,
+    "titles" : [ 
+        {
+            "language" : "English",
+            "translations" : [ 
+                "One Piece"
+            ]
+        }, 
+        {
+            "language" : "日本語",
+            "translations" : [ 
+                "ワンピース", 
+                "Wan Pīsu", 
+                "Wan Pi-su", 
+                "Wan Piisu", 
+                "Wan Pisu", 
+                "WanPīsu", 
+                "WanPi-su", 
+                "WanPiisu", 
+                "WanPisu"
+            ]
+        }, 
+        {
+            "language" : "العربية",
+            "translations" : [ 
+                "ون بيس"
+            ]
+        }, 
+        {
+            "language" : "Русский",
+            "translations" : [ 
+                "Ван-Пис", 
+                "Ван Пис"
+            ]
+        }, 
+        {
+            "language" : "中文",
+            "translations" : [ 
+                "海賊王", 
+                "航海王"
+            ]
+        }, 
+        {
+            "language" : "한국어",
+            "translations" : [ 
+                "원피스"
+            ]
+        }, 
+        {
+            "language" : "Bahasa Melayu",
+            "translations" : [ 
+                "Budak Getah"
+            ]
+        }, 
+        {
+            "language" : "ไทย",
+            "translations" : [ 
+                "วัน พีซ", 
+                "วันพีซ", 
+                "วัน พีช", 
+                "วันพีช"
+            ]
+        }, 
+        {
+            "language" : "Italiano",
+            "translations" : [ 
+                "One Piece - Tutti all'Arrembaggio", 
+                "All'arrembaggio! - One Piece", 
+                "Tutti All'arrembaggio", 
+                "All'arrembaggio!"
+            ]
+        }
+    ],
+    "genres" : [ 
+        1, 
+        2, 
+        6
+    ],
+    "airingStart" : NumberLong(940392000000),
+    "airingEnd" : null,
+    "producers" : [ 
+        1
+    ],
+    "episodesReleased" : 668,
+    "episodesTotal" : -1,
+    "episodeDuration" : 25,
+    "contentRating" : 2,
+    "synopsis" : [ 
+        {
+            "language" : "English",
+            "translations" : [ 
+                "Monkey D. Luffy, the boy who ate the Gum Gum Fruit and became a rubber man refuses to let anyone or anything stand in the way of his quest to become king of all pirates. With a course charted for the treacherous waters of the Grand Line, Luffy and his friends, the Straw Hats are taking on the challenges of this sea and will never drop anchor until they’ve claimed the greatest treasure on Earth – the Legendary One Piece!\n\nTwo years since the ultimate war in Marineford, Luffy and the Straw Hats, who completed their respective training, are headed to their next stage, the sea in the second half of the Grand Line where every pirate after One Piece is headed, familiarly known as the New World."
+            ]
+        }
+    ],
+    "adaptedType" : 1,
+    "adaptedFrom" : 1,
+    "related" : [],
+    "sidestory" : [],
+    "spinoff" : [],
+    "parentType" : 1,
+    "parentId" : 1
+}

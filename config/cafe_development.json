@@ -1,11 +1,27 @@
 {
   "port": 8898,
   "database": {
-    "host": "localhost",
-    "port": 27017,
-    "name": "otaku"
+    "otaku": {
+      "host": "localhost",
+      "port": 27017,
+      "name": "otaku"
+    },
+    "oauth": {
+      "host": "localhost",
+      "port": 27017,
+      "name": "otaku-oauth"
+    }
   },
   "logger": {
     "format": "dev"
+  },
+  "oauth": {
+    "server": {
+        "debug": true,
+        "grants": [ "password", "authorization_code", "refresh_token" ]
+    }
+  },
+  "session": {
+    "secret": "M3vt732d4120R574pJPhcEny1sy7Kiz3"
   }
 }

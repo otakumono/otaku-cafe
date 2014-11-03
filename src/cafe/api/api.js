@@ -1,6 +1,6 @@
-var xport = require('../xport')
-  , Database = require('./api/db')
-  , Feed = require('./api/feed')
+var xport = require('../../xport')
+  , Database = require('./db')
+  , Feed = require('./feed')
   ;
 
 var api = (function() {

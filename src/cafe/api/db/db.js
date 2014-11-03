@@ -1,8 +1,8 @@
-var xport = require('../../xport')
-  , Anime = require('./db/anime')
-  , AnimeChart = require('./db/animeChart')
-  , Manga = require('./db/manga')
-  , Novel = require('./db/novel')
+var xport = require('../../../xport')
+  , Anime = require('./anime')
+  , AnimeChart = require('./animeChart')
+  , Manga = require('./manga')
+  , Novel = require('./novel')
   ;
 
 var db = (function() {

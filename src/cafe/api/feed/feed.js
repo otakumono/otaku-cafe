@@ -1,5 +1,5 @@
-var xport = require('../../xport')
-  , News = require('./feed/news')
+var xport = require('../../../xport')
+  , News = require('./news')
   ;
 
 var feed = (function() {

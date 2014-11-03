@@ -1,7 +1,7 @@
 var xport = require('../../../xport')
   , makeAPI = require('../../../makeapi')
   , AnimeType = require('../../../lib/database/animeType')
-  , DBManager = require('../../../lib/database/dbmanager')
+  , Database = require('../../../lib/database')
   , ModelAnime = require('../../../lib/database/modelAnime')
   ;
 
@@ -38,7 +38,7 @@ var anime = (function() {
 
         name = name.replace(/\+/g, ' ');
 
-        DBManager.findRecordByName(ModelAnime, name, function(error, result) {
+        Database.findRecordByName(ModelAnime, name, function(error, result) {
             if (error) {
                 return next(error);
             }
@@ -80,11 +80,11 @@ var anime = (function() {
     };
 
     Anime.internalLookup = function(id, callback) {
-        DBManager.getRecord(ModelAnime, id, callback);
+        Database.getRecord(ModelAnime, id, callback);
     };
 
     Anime.internalSearch = function(name, callback, params) {
-        DBManager.findRecordByName(ModelAnime, name, function(error, result) {
+        Database.findRecordByName(ModelAnime, name, function(error, result) {
             if (error) {
                 return callback(error, result);
             }
