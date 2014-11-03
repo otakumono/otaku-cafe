@@ -17,16 +17,26 @@ var DBManager = (function() {
         modelType.remove({ id: recordId }, callback);
     };
 
-    DBManager.internalFindRecord = function(modelType, query, callback) {
-        modelType.findOne(query, callback);
+    DBManager.getRecord = function(modelType, recordId, callback) {
+        modelType.findOne({ id: recordId }, DBManager.clean(callback));
     };
 
     DBManager.findRecordByName = function(modelType, recordName, callback) {
-        DBManager.internalFindRecord(modelType, { 'titles.translations': { $in: [ new RegExp(recordName, 'i') ] } }, callback);
+        DBManager.internalFindRecord(modelType, { 'titles.translations': { $in: [ new RegExp(recordName, 'i') ] } }, DBManager.clean(callback));
     };
 
-    DBManager.getRecord = function(modelType, recordId, callback) {
-        modelType.findOne({ id: recordId }, callback);
+    DBManager.internalFindRecord = function(modelType, query, callback) {
+        modelType.findOne(query, DBManager.clean(callback));
+    };
+
+    DBManager.clean = function(callback) {
+        return function(error, result) {
+            if (result) {
+                result._id = undefined;
+            }
+
+            callback(error, result);
+        };
     };
 
     return DBManager;

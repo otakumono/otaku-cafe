@@ -11,7 +11,7 @@ var SchemaAnime = mongoose.Schema({
     genres: [Number],
     airingStart: Number,
     airingEnd: Number,
-    producers: [String],
+    producers: [Number],
     episodesReleased: Number,
     episodesTotal: Number,
     episodeDuration: Number,
