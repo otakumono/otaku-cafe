@@ -1,4 +1,4 @@
-var xport = require('../../xport')
+var xport = require('node-xport')
   , mongoose = require('mongoose')
   , SchemaTranslationLanguage = require('./schemaTranslationLanguage')
   ;

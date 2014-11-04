@@ -1,4 +1,4 @@
-var xport = require('../../xport')
+var xport = require('node-xport')
   , Database = require('./db')
   , Feed = require('./feed')
   ;

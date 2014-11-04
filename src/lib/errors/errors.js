@@ -1,4 +1,4 @@
-var xport = require('../../xport')
+var xport = require('node-xport')
   , error404 = require('./404')
   , error400 = require('./400')
   , util = require('util')

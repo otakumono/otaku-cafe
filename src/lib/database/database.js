@@ -1,42 +1,27 @@
-var xport = require('../../xport')
+var xport = require('node-xport')
   ;
 
 var Database = (function() {
     function Database() {}
 
-    Database.addRecord = function(modelType, record, callback) {
-        var model = new modelType(record);
-        model.save();
+    Database.add = function(modelType, document, callback) {
+        new modelType(document).save(callback);
     };
 
-    Database.updateRecord = function(modelType, record, callback) {
-        modelType.update({ id: record.id }, record, { multi: false }, callback);
+    Database.update = function(modelType, conditions, document, updateMultiple, callback) {
+        modelType.update(conditions, document, { multi: updateMultiple }, callback);
     };
 
-    Database.removeRecord = function(modelType, recordId, callback) {
-        modelType.remove({ id: recordId }, callback);
+    Database.remove = function(modelType, conditions, callback) {
+        modelType.remove(conditions, callback);
     };
 
-    Database.getRecord = function(modelType, recordId, callback) {
-        modelType.findOne({ id: recordId }, Database.clean(callback));
+    Database.findAll = function(modelType, conditions, callback) {
+        modelType.find(conditions, callback);
     };
 
-    Database.findRecordByName = function(modelType, recordName, callback) {
-        Database.internalFindRecord(modelType, { 'titles.translations': { $in: [ new RegExp(recordName, 'i') ] } }, Database.clean(callback));
-    };
-
-    Database.internalFindRecord = function(modelType, query, callback) {
-        modelType.findOne(query, Database.clean(callback));
-    };
-
-    Database.clean = function(callback) {
-        return function(error, result) {
-            if (result) {
-                result._id = undefined;
-            }
-
-            callback(error, result);
-        };
+    Database.findOne = function(modelType, conditions, callback) {
+        modelType.findOne(conditions, callback);
     };
 
     return Database;

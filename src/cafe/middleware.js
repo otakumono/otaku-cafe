@@ -1,5 +1,5 @@
-var xport = require('../xport')
-  , models = require('./models')
+var xport = require('node-xport')
+  , models = require('../lib/database/oauth')
   , makeAPI = require('../makeapi')
   , routes = require('./routes')
   ;
@@ -44,7 +44,34 @@ var middleware = (function() {
     };
 
     Middleware.register = function(cafe, baseUrl) {
-        makeAPI.route(cafe, baseUrl, routes.index);
+        var routeIndex = cafe.route(baseUrl);
+        routeIndex.get(routes.index);
+
+        var routeAuthorize = cafe.route(baseUrl + 'oauth/authorize');
+        routeAuthorize.get(function(request, response, next) {
+            if (!request.session.userId) {
+                return response.redirect(
+                    '/session?redirect=' + request.path +
+                    '&clientId=' + request.query.clientId +
+                    '&redirectUri=' + request.query.redirectUri
+                    );
+            }
+
+            response.render('authorize', {
+                'clientId': request.query.clientId,
+                'redirectUri': request.query.redirectUri
+            });
+        });
+
+        routeAuthorize.post(function(request, response, next) {
+            if (!request.session.userId) {
+                return response.redirect(
+                    '/session?redirect=' + request.path +
+                    '&clientId=' + request.query.clientId +
+                    '&redirectUri=' + request.query.redirectUri
+                    );
+            }
+        });
     };
 
     return Middleware;

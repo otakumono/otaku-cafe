@@ -1,4 +1,4 @@
-var xport = require('../xport')
+var xport = require('node-xport')
   , error = require('../lib/errors')
   , config = require('../config')
   , express = require('express')
@@ -17,7 +17,7 @@ var xport = require('../xport')
   , cookieParser = require('cookie-parser')
   , cookieSession = require('cookie-session')
   , methodOverride = require('method-override')
-  , models = require('./models')
+  , oauthModels = require('../lib/database/oauth')
   , middleware = require('./middleware')
   ;
 
@@ -43,7 +43,7 @@ cafe.use(cookieParser(config.get('session:secret')));
 cafe.use(cookieSession({ secret: config.get('session:secret') }));
 
 cafe.oauth = oauthserver({
-  model: models.oauth,
+  model: oauthModels.oauth,
   grants: config.get('oath:server:grants'),
   debug: config.get('oauth:server:debug')
 });
@@ -72,9 +72,9 @@ cafeAPI.register(cafe, '/');
 
 cafe.all('/oauth/token', cafe.oauth.grant());
 
-cafe.get('/', cafe.oauth.authorise(), function (request, response) {
+/*cafe.get('/', cafe.oauth.authorise(), function (request, response) {
   response.send('Authorized');
-});
+});*/
 
 cafe.use(cafe.oauth.errorHandler());
 

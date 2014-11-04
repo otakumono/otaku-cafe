@@ -1,8 +1,8 @@
-var xport = require('../../../xport')
+var xport = require('node-xport')
   , makeAPI = require('../../../makeapi')
-  , AnimeType = require('../../../lib/database/animeType')
-  , Database = require('../../../lib/database')
-  , ModelAnime = require('../../../lib/database/modelAnime')
+  , Database = require('../../../lib/database/otaku')
+  , AnimeType = require('../../../lib/database/otaku/animeType')
+  , ModelAnime = require('../../../lib/database/otaku/modelAnime')
   ;
 
 var anime = (function() {
@@ -18,7 +18,8 @@ var anime = (function() {
 
     Anime.lookupID = function(request, response, next) {
         var id = request.params.id;
-        Anime.internalLookup(id, function(error, result) {
+        
+        Database.get(ModelAnime, id, function(error, result) {
             if (error) {
                 return next(error);
             }
@@ -29,73 +30,41 @@ var anime = (function() {
     };
 
     Anime.lookupName = function(request, response, next) {
+        Anime.internalLookupName(request, response, next, function(error, result) {
+            if (error) {
+                return next(error);
+            }
+
+            response.type('application/json');
+            response.send(result);
+        });
+    };
+
+    Anime.searchName = function(request, response, next) {
+        Anime.internalLookupName(request, response, next, function(error, result) {
+            if (error) {
+                return next(error);
+            }
+
+            response.type('application/json');
+            response.send({
+                "query": request.params.name,
+                "result": (result ? result.id : -1)
+            });
+        });
+    };
+
+    Anime.internalLookupName = function(request, response, next, dbCallback) {
         var name = request.params.name;
         if (!name) {
             response.type('application/json');
-            response.send({ id: 0 });
+            response.send({ id: -1 });
             return;
         }
 
         name = name.replace(/\+/g, ' ');
 
-        Database.findRecordByName(ModelAnime, name, function(error, result) {
-            if (error) {
-                return next(error);
-            }
-
-            var queryResult = { id: 0 };
-
-            if (result) {
-                queryResult = result;
-            }
-            
-            response.type('application/json');
-            response.send(queryResult);
-        });
-    };
-
-    Anime.searchName = function(request, response, next) {
-        var name = request.params.name;
-        if (!name) {
-            response.type('application/json');
-            response.send({ id: 0 });
-            return;
-        }
-
-        Anime.internalSearch(name, function(error, result) {
-            if (error) {
-                return next(error);
-            }
-
-            var queryResult = {
-                "query": {
-                    "name": name
-                },
-                "result": result
-            };
-
-            response.type('application/json');
-            response.send(queryResult);
-        }, { type: AnimeType.TV });
-    };
-
-    Anime.internalLookup = function(id, callback) {
-        Database.getRecord(ModelAnime, id, callback);
-    };
-
-    Anime.internalSearch = function(name, callback, params) {
-        Database.findRecordByName(ModelAnime, name, function(error, result) {
-            if (error) {
-                return callback(error, result);
-            }
-
-            var queryResult = { id: 0 };
-            if (result) {
-                queryResult.id = result.id;
-            }
-
-            callback(error, queryResult);
-        });
+        Database.findByName(ModelAnime, name, dbCallback);
     };
 
     return Anime;

@@ -1,4 +1,4 @@
-var xport = require('../../../xport')
+var xport = require('node-xport')
   , Anime = require('./anime')
   , AnimeChart = require('./animeChart')
   , Manga = require('./manga')

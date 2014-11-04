@@ -1,5 +1,5 @@
-var xport = require('../../xport')
-  , dtype = require('../dtype')
+var xport = require('node-xport')
+  , dtype = require('../../dtype')
   ;
 
 var statuses = [

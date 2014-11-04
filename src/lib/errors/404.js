@@ -1,4 +1,4 @@
-var xport = require('../../xport')
+var xport = require('node-xport')
   ;
 
 var error404 = function(options) {
