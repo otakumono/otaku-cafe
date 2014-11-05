@@ -3,6 +3,8 @@ var dirOtaku = dirLogic + 'otaku/';
 
 var xport = require('node-xport')
   , LogicAnime = require(dirOtaku + 'logicAnime')
+  , LogicManga = require(dirOtaku + 'logicManga')
+  , LogicNovel = require(dirOtaku + 'logicNovel')
   ;
 
 function APIOtakuDB(baseUrl) {
@@ -30,6 +32,7 @@ function routeAnime(express, path) {
                 return next(error);
             }
 
+            result = (result ? (result._doc || {}) : {});
             respond(response, result);
         });
     });
@@ -40,6 +43,7 @@ function routeAnime(express, path) {
                 return next(error);
             }
 
+            result = (result ? (result._doc || {}) : {});
             respond(response, result);
         });
     });
@@ -49,8 +53,12 @@ function routeAnime(express, path) {
             if (error) {
                 return next(error);
             }
-
-            result.query = request.params.name; /* TODO: This doesn't appear to do anything. Fix it. */
+            
+            result = (result ? (result._doc || {}) : {});
+            result.request = {
+                'params': request.params,
+                'query': request.query
+            };
             respond(response, result);
         });
     });
@@ -63,6 +71,42 @@ function routeManga(express, path) {
     var routeStatisticsTotal = express.route(path + 'statistics/total');
     var routeStatisticsType = express.route(path + 'statistics/type/:type');
 
+    routeId.get(function(request, response, next) {
+        LogicManga.retrieve(request.params.id, function(error, result) {
+            if (error) {
+                return next(error);
+            }
+
+            result = (result ? (result._doc || {}) : {});
+            respond(response, result);
+        });
+    });
+
+    routeName.get(function(request, response, next) {
+        LogicManga.lookup(request.params.name, function(error, result) {
+            if (error) {
+                return next(error);
+            }
+
+            result = (result ? (result._doc || {}) : {});
+            respond(response, result);
+        });
+    });
+
+    routeSearch.get(function(request, response, next) {
+        LogicManga.search(request.params.name, function(error, result) {
+            if (error) {
+                return next(error);
+            }
+            
+            result = (result ? (result._doc || {}) : {});
+            result.request = {
+                'params': request.params,
+                'query': request.query
+            };
+            respond(response, result);
+        });
+    });
 }
 
 function routeNovel(express, path) {
@@ -71,7 +115,43 @@ function routeNovel(express, path) {
     var routeSearch = express.route(path + 'search/:name');
     var routeStatisticsTotal = express.route(path + 'statistics/total');
     var routeStatisticsType = express.route(path + 'statistics/type/:type');
-    
+
+    routeId.get(function(request, response, next) {
+        LogicNovel.retrieve(request.params.id, function(error, result) {
+            if (error) {
+                return next(error);
+            }
+
+            result = (result ? (result._doc || {}) : {});
+            respond(response, result);
+        });
+    });
+
+    routeName.get(function(request, response, next) {
+        LogicNovel.lookup(request.params.name, function(error, result) {
+            if (error) {
+                return next(error);
+            }
+
+            result = (result ? (result._doc || {}) : {});
+            respond(response, result);
+        });
+    });
+
+    routeSearch.get(function(request, response, next) {
+        LogicNovel.search(request.params.name, function(error, result) {
+            if (error) {
+                return next(error);
+            }
+            
+            result = (result ? (result._doc || {}) : {});
+            result.request = {
+                'params': request.params,
+                'query': request.query
+            };
+            respond(response, result);
+        });
+    });
 }
 
 function respond(response, result) {
