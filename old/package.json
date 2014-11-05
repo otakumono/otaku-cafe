@@ -1,7 +1,7 @@
 {
   "name": "otaku-cafe",
   "description": "An anime/manga database system.",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.1-alpha.0",
   "private": true,
   "repository": {
     "type": "git",
@@ -33,12 +33,12 @@
     "node": "^0.10.33"
   },
   "scripts": {
-    "start": "nodemon -x node cafe.js -e js,json -i \"otaku.*.json\" -i \"test/**.*\"",
+    "start": "nodemon --exec node src/cafe --ext js,json",
     "test-travis": ""
   },
   "dependencies": {
     "node-xport": ">= 0.1.1",
-    "express": "^4.10.1",
+    "express": "~4.10.1",
     "nconf": "0.6.9",
     "cors": "^2.3.1",
     "mongodb": "*",
