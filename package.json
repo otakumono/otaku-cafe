@@ -33,7 +33,7 @@
     "node": "^0.10.33"
   },
   "scripts": {
-    "start": "nodemon -x node cafe.js -e js,json -i \"otaku.*.json\" -i \"test/**.*\"",
+    "start": "nodemon -x node cafe.js -e js,json -i \"otaku.*.json\" -i \"test/**.*\" -i \"(.*|LICENSE*|README*)\" -i \"public/**.*\"",
     "test-travis": ""
   },
   "dependencies": {

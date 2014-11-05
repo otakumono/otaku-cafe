@@ -33,3 +33,6 @@ node_modules
 
 # Posters
 public/posters/
+
+# Config files
+otaku.*.json
