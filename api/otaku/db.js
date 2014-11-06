@@ -32,7 +32,7 @@ function routeAnime(express, path) {
                 return next(error);
             }
 
-            result = (result ? (result._doc || {}) : {});
+            result = (result ? (result._doc || result) : {});
             respond(response, result);
         });
     });
@@ -42,8 +42,8 @@ function routeAnime(express, path) {
             if (error) {
                 return next(error);
             }
-
-            result = (result ? (result._doc || {}) : {});
+            
+            result = (result ? (result._doc || result) : {});
             respond(response, result);
         });
     });
@@ -54,7 +54,7 @@ function routeAnime(express, path) {
                 return next(error);
             }
             
-            result = (result ? (result._doc || {}) : {});
+            result = (result ? (result._doc || result) : {});
             result.request = {
                 'params': request.params,
                 'query': request.query
@@ -77,7 +77,7 @@ function routeManga(express, path) {
                 return next(error);
             }
 
-            result = (result ? (result._doc || {}) : {});
+            result = (result ? (result._doc || result) : {});
             respond(response, result);
         });
     });
@@ -88,7 +88,7 @@ function routeManga(express, path) {
                 return next(error);
             }
 
-            result = (result ? (result._doc || {}) : {});
+            result = (result ? (result._doc || result) : {});
             respond(response, result);
         });
     });
@@ -99,7 +99,7 @@ function routeManga(express, path) {
                 return next(error);
             }
             
-            result = (result ? (result._doc || {}) : {});
+            result = (result ? (result._doc || result) : {});
             result.request = {
                 'params': request.params,
                 'query': request.query
@@ -122,7 +122,7 @@ function routeNovel(express, path) {
                 return next(error);
             }
 
-            result = (result ? (result._doc || {}) : {});
+            result = (result ? (result._doc || result) : {});
             respond(response, result);
         });
     });
@@ -133,7 +133,7 @@ function routeNovel(express, path) {
                 return next(error);
             }
 
-            result = (result ? (result._doc || {}) : {});
+            result = (result ? (result._doc || result) : {});
             respond(response, result);
         });
     });
@@ -144,7 +144,7 @@ function routeNovel(express, path) {
                 return next(error);
             }
             
-            result = (result ? (result._doc || {}) : {});
+            result = (result ? (result._doc || result) : {});
             result.request = {
                 'params': request.params,
                 'query': request.query
