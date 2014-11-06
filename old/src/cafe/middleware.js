@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   , models = require('../lib/database/oauth')
   , makeAPI = require('../makeapi')
   , routes = require('./routes')
@@ -77,4 +77,4 @@ var middleware = (function() {
     return Middleware;
 })();
 
-xport(module, middleware);
+xport(middleware);

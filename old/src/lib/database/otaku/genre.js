@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   , dtype = require('../../dtype')
   ;
 
@@ -67,4 +67,4 @@ var genre = (function() {
 })();
 
 /* Module Export */
-xport(module, genre);
+xport(genre);

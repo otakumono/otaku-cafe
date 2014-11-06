@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   , error = require('../lib/errors')
   , config = require('../config')
   , express = require('express')
@@ -87,4 +87,4 @@ var listener = cafe.listen(config.get('port'), function() {
 
 
 /* Export the module */
-xport(module, cafe);
+xport(cafe);

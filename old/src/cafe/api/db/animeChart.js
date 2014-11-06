@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   , makeAPI = require('../../../makeapi')
   ;
 
@@ -13,4 +13,4 @@ var animeChart = (function() {
 })();
 
 /* Export the module */
-xport(module, animeChart);
+xport(animeChart);

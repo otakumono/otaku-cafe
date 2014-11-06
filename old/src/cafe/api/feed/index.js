@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   ;
 
-xport(module, require('./feed'));
+xport(require('./feed'));

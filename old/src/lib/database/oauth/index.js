@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   ;
 
 var models = {
@@ -8,4 +8,4 @@ var models = {
   'mongoose': require('../../../connections')
 };
 
-xport(module, models);
+xport(models);

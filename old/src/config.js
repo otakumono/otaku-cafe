@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   , nconf = require('nconf')
   , env = (process.env.NODE_ENV || 'development')
   , configFile = 'config/cafe_' + env + '.json'
@@ -29,4 +29,4 @@ nconf
     ;
 
 /* Export the module */
-xport(module, nconf);
+xport(nconf);

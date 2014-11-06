@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   , dtype = require('../../dtype')
   ;
 
@@ -46,4 +46,4 @@ var animeType = (function() {
 })();
 
 /* Export the module */
-xport(module, animeType);
+xport(animeType);

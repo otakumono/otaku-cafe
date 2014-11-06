@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   , mongoose = require('mongoose')
   ;
 
@@ -8,4 +8,4 @@ var schemaClient = mongoose.Schema({
     redirectUri: String
 });
 
-xport(module, schemaClient);
+xport(schemaClient);

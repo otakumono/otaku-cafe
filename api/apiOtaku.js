@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   , APIOtakuDB = require('./otaku/db')
   , APIOtakuFeed = require('./otaku/feed')
   ;
@@ -14,4 +14,4 @@ APIOtaku.prototype.register = function(express) {
     /*ths.feed.register(express);*/
 };
 
-xport(module, APIOtaku);
+xport(APIOtaku);

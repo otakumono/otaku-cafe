@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   ;
 
 var routes = (function() {
@@ -14,4 +14,4 @@ var routes = (function() {
     return Routes;
 })();
 
-xport(module, routes);
+xport(routes);

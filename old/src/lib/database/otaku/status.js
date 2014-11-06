@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   , dtype = require('../../dtype')
   ;
 
@@ -44,4 +44,4 @@ var status = (function() {
 })();
 
 /* Module Export */
-xport(module, status);
+xport(status);

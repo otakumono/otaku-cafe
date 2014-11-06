@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   , error404 = require('./404')
   , error400 = require('./400')
   , util = require('util')
@@ -59,4 +59,4 @@ var errors = (function() {
 })();
 
 /* Export the module */
-xport(module, errors);
+xport(errors);

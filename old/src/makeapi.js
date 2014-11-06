@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   , dtype = require('./lib/dtype')
   ;
 
@@ -82,4 +82,4 @@ var makeAPI = (function() {
 })();
 
 /* Export the module */
-xport(module, makeAPI);
+xport(makeAPI);

@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   , mongoose = require('mongoose')
   ;
 
@@ -8,4 +8,4 @@ var SchemaTranslationLanguage = mongoose.Schema({
 });
 
 /* Module Export */
-xport(module, SchemaTranslationLanguage);
+xport(SchemaTranslationLanguage);

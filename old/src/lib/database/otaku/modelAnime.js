@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   , mongoose = require('../../../connections').otaku
   , SchemaAnime = require('./schemaAnime')
   ;
@@ -6,4 +6,4 @@ var xport = require('node-xport')
 var ModelAnime = mongoose.model('ModelAnime', SchemaAnime, 'anime');
 
 /* Module Export */
-xport(module, ModelAnime);
+xport(ModelAnime);

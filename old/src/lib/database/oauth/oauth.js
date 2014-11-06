@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   , Database = require('../database')
   , modelUser = require('./modelUser')
   , modelClient = require('./modelClient')
@@ -123,4 +123,4 @@ var oauth = (function() {
     return OAuth;
 })();
 
-xport(module, oauth);
+xport(oauth);

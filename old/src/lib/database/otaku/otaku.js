@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   , Database = require('../database')
   ;
 
@@ -28,4 +28,4 @@ var otaku = (function() {
     return Otaku;
 })();
 
-xport(module, otaku);
+xport(otaku);

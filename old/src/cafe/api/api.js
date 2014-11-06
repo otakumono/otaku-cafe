@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   , Database = require('./db')
   , Feed = require('./feed')
   ;
@@ -17,4 +17,4 @@ var api = (function() {
 })();
 
 /* Export the module */
-xport(module, api);
+xport(api);

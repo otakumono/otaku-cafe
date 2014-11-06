@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   ;
 
 var Database = (function() {
@@ -28,4 +28,4 @@ var Database = (function() {
 })();
 
 /* Module Export */
-xport(module, Database);
+xport(Database);

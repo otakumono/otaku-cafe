@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   , Anime = require('./anime')
   , AnimeChart = require('./animeChart')
   , Manga = require('./manga')
@@ -21,4 +21,4 @@ var db = (function() {
 })();
 
 /* Export the module */
-xport(module, db);
+xport(db);

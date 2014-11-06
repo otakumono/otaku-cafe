@@ -4,7 +4,7 @@ var config = Config('otaku.cafe.json');
 config.parse();
 config.save();
 
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   , express = require('express')
   , logger = require('morgan')
   , responseTime = require('response-time')
@@ -61,4 +61,4 @@ var listener = server.listen(config.get('server:port'), config.get('server:host'
 
 
 /* Export the module */
-xport(module, server);
+xport(server);

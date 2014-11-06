@@ -1,7 +1,7 @@
 var dirLogic = '../../lib/logic/';
 var dirOtaku = dirLogic + 'otaku/';
 
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   , LogicAnime = require(dirOtaku + 'logicAnime')
   , LogicManga = require(dirOtaku + 'logicManga')
   , LogicNovel = require(dirOtaku + 'logicNovel')
@@ -159,4 +159,4 @@ function respond(response, result) {
     response.send(result);
 }
 
-xport(module, APIOtakuDB);
+xport(APIOtakuDB);

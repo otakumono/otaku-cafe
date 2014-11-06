@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   , mongoose = require('mongoose')
   ;
 
@@ -16,4 +16,4 @@ var schemaAccessToken = mongoose.Schema({
     expires: Number
 });
 
-xport(module, schemaAccessToken);
+xport(schemaAccessToken);

@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   , makeAPI = require('../../../makeapi')
   , Database = require('../../../lib/database/otaku')
   , AnimeType = require('../../../lib/database/otaku/animeType')
@@ -71,4 +71,4 @@ var anime = (function() {
 })();
 
 /* Export the module */
-xport(module, anime);
+xport(anime);

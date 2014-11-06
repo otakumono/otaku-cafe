@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   , mongoose = require('mongoose')
   ;
 
@@ -21,4 +21,4 @@ var schemaUser = mongoose.Schema({
     nameFamily: String
 });
 
-xport(module, schemaUser);
+xport(schemaUser);

@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   , News = require('./news')
   ;
 
@@ -15,4 +15,4 @@ var feed = (function() {
 })();
 
 /* Export the module */
-xport(module, feed);
+xport(feed);

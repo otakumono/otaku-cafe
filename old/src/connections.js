@@ -1,4 +1,4 @@
-var xport = require('node-xport')
+var xport = require('node-xport')(module)
   , config = require('./config')
   , mongoose = require('mongoose')
   ;
@@ -37,4 +37,4 @@ var connections = (function() {
     return Connections;
 })();
 
-xport(module, connections);
+xport(connections);
