@@ -4,9 +4,20 @@ var config = Config('otaku.cafe.json');
 config.parse();
 config.save();
 
+var fs = require('fs');
+var sslKey = fs.readFileSync('./security/localkey.pem');
+var sslCert = fs.readFileSync('./security/localcert.pem');
+
+var sslOptions = {
+  key: sslKey,
+  cert: sslCert
+};
+
 var xport = require('node-xport')(module)
   , express = require('express')
   , logger = require('morgan')
+  , https = require('https')
+  , http = require('http')
   , responseTime = require('response-time')
   , favicon = require('serve-favicon')
   , bodyParser = require('body-parser')
@@ -47,6 +58,12 @@ server.use(cookieParser(config.get('session:secret')));
 server.use(cookieSession({ secret: config.get('session:secret') }));
 
 server.use(function(request, response, next) {
+    console.log("request received");
+    if (!request.secure) {
+      console.log('https://' + request.hostname + ':' + config.get('server:port') + request.url);
+        return response.redirect('https://' + request.hostname + ':' + config.get('server:port') + request.url);
+    }
+
     next();
 });
 
@@ -54,11 +71,17 @@ api.register(server);
 
 server.use(HTTPError(400, 'Bad request.').handle);
 
-var listener = server.listen(config.get('server:port'), config.get('server:host'), 511, function() {
-    var boundAddress = listener.address();
+var secureInstance = https.createServer(sslOptions, server);
+var secureListener = secureInstance.listen(config.get('server:port'), config.get('server:host'), 511, function() {
+    var boundAddress = secureListener.address();
     console.log('otaku-cafe listening on ' + boundAddress.address + ':' + boundAddress.port + '.');
 });
 
+var unsecureInstance = http.createServer(server);
+var unsecureListener = unsecureInstance.listen(config.get('server:unsecure-port'), config.get('server:host'), 511, function() {
+    var boundAddress = unsecureListener.address();
+    console.log('otaku-cafe redirecting on ' + boundAddress.address + ':' + boundAddress.port + '.');
+});
 
 /* Export the module */
 xport(server);

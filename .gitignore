@@ -36,3 +36,8 @@ public/posters/
 
 # Config files
 otaku.*.json
+
+# Cert/Key and Security Files
+*.pem
+*.pfx
+security/
